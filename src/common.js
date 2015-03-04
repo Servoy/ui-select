@@ -84,7 +84,7 @@ if (angular.element.prototype.closest === undefined) {
 
 var latestId = 0;
 
-var uis = angular.module('ui.select', [])
+var uis = angular.module('ui.select', ['ui.bootstrap'])
 
 .constant('uiSelectConfig', {
   theme: 'bootstrap',
@@ -93,6 +93,7 @@ var uis = angular.module('ui.select', [])
   placeholder: '', // Empty by default, like HTML tag <select>
   refreshDelay: 1000, // In milliseconds
   closeOnSelect: true,
+  appendToBody: false,
   generateId: function() {
     return latestId++;
   }

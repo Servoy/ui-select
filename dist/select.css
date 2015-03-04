@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.10.0 - 2015-02-26T06:35:06.243Z
+ * Version: 0.10.0 - 2015-03-04T16:03:34.995Z
  * License: MIT
  */
 
@@ -171,7 +171,7 @@
   border-right: 1px solid #428bca;
 }
 
-.ui-select-bootstrap .ui-select-choices-row>a {
+.ui-select-choices-row>a {
     display: block;
     padding: 3px 20px;
     clear: both;
@@ -181,21 +181,21 @@
     white-space: nowrap;
 }
 
-.ui-select-bootstrap .ui-select-choices-row>a:hover, .ui-select-bootstrap .ui-select-choices-row>a:focus {
+.ui-select-choices-row>a:hover, .ui-select-choices-row>a:focus {
     text-decoration: none;
     color: #262626;
     background-color: #f5f5f5;
 }
 
-.ui-select-bootstrap .ui-select-choices-row.active>a {
+.ui-select-choices-row.active>a {
     color: #fff;
     text-decoration: none;
     outline: 0;
     background-color: #428bca;
 }
 
-.ui-select-bootstrap .ui-select-choices-row.disabled>a,
-.ui-select-bootstrap .ui-select-choices-row.active.disabled>a {
+.ui-select-choices-row.disabled>a,
+.ui-select-choices-row.active.disabled>a {
     color: #777;
     cursor: not-allowed;
     background-color: #fff;
@@ -210,4 +210,10 @@
 /* Mark invalid Bootstrap */
 .ui-select-bootstrap.ng-dirty.ng-invalid > button.btn.ui-select-match {
     border-color: #D44950;
+}
+.ui-select-choices-open {
+	display:block;
+}
+.ui-select-choices-closed {
+	display:none;
 }

@@ -1,6 +1,6 @@
 uis.directive('uiSelectChoices',
-  ['uiSelectConfig', 'RepeatParser', 'uiSelectMinErr', '$compile',
-  function(uiSelectConfig, RepeatParser, uiSelectMinErr, $compile) {
+  ['uiSelectConfig', 'RepeatParser', 'uiSelectMinErr', '$compile', '$document','$position',
+  function(uiSelectConfig, RepeatParser, uiSelectMinErr, $compile, $document, $position) {
 
   return {
     restrict: 'EA',
@@ -12,7 +12,6 @@ uis.directive('uiSelectChoices',
       var theme = tElement.parent().attr('theme') || uiSelectConfig.theme;
       return theme + '/choices.tpl.html';
     },
-
     compile: function(tElement, tAttrs) {
 
       if (!tAttrs.repeat) throw uiSelectMinErr('repeat', "Expected 'repeat' expression.");
@@ -26,6 +25,7 @@ uis.directive('uiSelectChoices',
 
         $select.disableChoiceExpression = attrs.uiDisableChoice;
         $select.onHighlightCallback = attrs.onHighlight;
+        $select.appendToBody = attrs.appendToBody ? attrs.appendToBody !== 'false' : $select.appendToBody;
 
         if(groupByExp) {
           var groups = element.querySelectorAll('.ui-select-choices-group');
@@ -59,6 +59,23 @@ uis.directive('uiSelectChoices',
           // $eval() is needed otherwise we get a string instead of a number
           var refreshDelay = scope.$eval(attrs.refreshDelay);
           $select.refreshDelay = refreshDelay !== undefined ? refreshDelay : uiSelectConfig.refreshDelay;
+        });
+        
+        scope.showChoices = function()
+        {
+        	return $select.open && $select.items.length > 0;
+        };
+        scope.container = element.closest('.ui-select-container');
+        if ($select.appendToBody)
+        {
+    		$document.find('body').append(element);
+        }
+        scope.$watch('$select.open', function(newValue) {
+        	if (newValue)
+        	{
+        		scope.position = $position.offset(scope.container);
+        		scope.position.top = scope.position.top + scope.container.prop('offsetHeight');
+        	}
         });
       };
     }
