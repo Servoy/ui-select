@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.10.0 - 2015-03-04T16:03:34.995Z
+ * Version: 0.10.0 - 2015-03-05T11:13:00.977Z
  * License: MIT
  */
 
@@ -274,7 +274,7 @@ uis.directive('uiSelectChoices',
         	if (newValue)
         	{
         		scope.position = $position.offset(scope.container);
-        		scope.position.top = scope.position.top + scope.container.prop('offsetHeight');
+        		if ($select.searchEnabled) scope.position.top = scope.position.top + scope.container.prop('offsetHeight');
         	}
         });
       };
