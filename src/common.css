@@ -205,6 +205,7 @@
 }
 .ui-select-choices-open {
 	display:block;
+	position: fixed;
 }
 .ui-select-choices-closed {
 	display:none;

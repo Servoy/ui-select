@@ -1,4 +1,4 @@
-<ul class="ui-select-choices ui-select-choices-content select2-results">
+<ul class="ui-select-choices ui-select-choices-content select2-results" ng-class="{'ui-select-choices-open': showChoices(), 'ui-select-choices-closed': !showChoices()}" ng-style="{top: position.top+'px', left: position.left+'px'}">
   <li class="ui-select-choices-group" ng-class="{'select2-result-with-children': $select.choiceGrouped($group) }">
     <div ng-show="$select.choiceGrouped($group)" class="ui-select-choices-group-label select2-result-label" ng-bind="$group.name"></div>
     <ul role="listbox"
