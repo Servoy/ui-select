@@ -1,6 +1,6 @@
 uis.directive('uiSelect',
-  ['$document', 'uiSelectConfig', 'uiSelectMinErr', '$compile', '$parse',
-  function($document, uiSelectConfig, uiSelectMinErr, $compile, $parse) {
+  ['$document', 'uiSelectConfig', 'uiSelectMinErr', '$compile', '$parse', '$timeout',
+  function($document, uiSelectConfig, uiSelectMinErr, $compile, $parse, $timeout) {
 
   return {
     restrict: 'EA',
@@ -15,7 +15,6 @@ uis.directive('uiSelect',
 
     controller: 'uiSelectCtrl',
     controllerAs: '$select',
-
     link: function(scope, element, attrs, ctrls, transcludeFn) {
       var $select = ctrls[0];
       var ngModel = ctrls[1];
@@ -212,6 +211,10 @@ uis.directive('uiSelect',
       attrs.$observe('disabled', function() {
         // No need to use $eval() (thanks to ng-disabled) since we already get a boolean instead of a string
         $select.disabled = attrs.disabled !== undefined ? attrs.disabled : false;
+        if ($select.multiple) {
+          // As the search input field may now become visible, it may be necessary to recompute its size
+          $select.sizeSearchInput();
+        }
       });
 
       attrs.$observe('resetSearchInput', function() {
@@ -254,6 +257,22 @@ uis.directive('uiSelect',
           $select.taggingTokens = {isActivated: true, tokens: tokens };
         }
       });
+
+      //Automatically gets focus when loaded
+      if (angular.isDefined(attrs.autofocus)){
+        $timeout(function(){
+          $select.setFocus();
+        });
+      }
+
+      //Gets focus based on scope event name (e.g. focus-on='SomeEventName')
+      if (angular.isDefined(attrs.focusOn)){
+        scope.$on(attrs.focusOn, function() {
+            $timeout(function(){
+              $select.setFocus();
+            });
+        });
+      }
 
       if ($select.multiple){
         scope.$watchCollection(function(){ return ngModel.$modelValue; }, function(newValue, oldValue) {
