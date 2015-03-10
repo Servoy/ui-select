@@ -1,6 +1,6 @@
 uis.directive('uiSelectChoices',
-  ['uiSelectConfig', 'RepeatParser', 'uiSelectMinErr', '$compile', '$document','$position',
-  function(uiSelectConfig, RepeatParser, uiSelectMinErr, $compile, $document, $position) {
+  ['uiSelectConfig', 'RepeatParser', 'uiSelectMinErr', '$compile', '$document','$position','$window',
+  function(uiSelectConfig, RepeatParser, uiSelectMinErr, $compile, $document, $position, $window) {
 
   return {
     restrict: 'EA',
@@ -66,23 +66,34 @@ uis.directive('uiSelectChoices',
         	return $select.open && $select.items.length > 0;
         };
         scope.container = element.closest('.ui-select-container');
+        scope.choicesElement = element;
         if ($select.appendToBody)
         {
     		$document.find('body').append(element);
-    		scope.element = element;
         }
+        scope.showOnTop = function(position)
+        {
+            var viewport_bottom = $window.scrollY + $window.innerHeight;
+            var max_height = scope.choicesElement.css('max-height') != 'none' ? parseInt(scope.choicesElement.css('max-height'), 10) : 200;
+            return viewport_bottom < position.top + max_height;
+        };
         scope.$watch('$select.open', function(newValue) {
         	if (newValue)
         	{
-        		scope.position = $position.offset(scope.container);
-        		if ($select.searchEnabled) scope.position.top = scope.position.top + scope.container.prop('offsetHeight');
-                scope.dropdownStyle = {top: scope.position.top+'px', left: scope.position.left+'px'};
+        		var position = $select.appendToBody ? $position.offset(scope.container) : $position.position(scope.container);
+        		if ($select.searchEnabled) position.top = position.top + scope.container.prop('offsetHeight');
+        		scope.dropdownStyle = {top: position.top+'px', left: position.left+'px'};
+        		if (scope.showOnTop(position))
+        		{
+        			delete scope.dropdownStyle.top;
+        			scope.dropdownStyle.bottom = $window.scrollY + $window.innerHeight - $position.offset(scope.container).top + 'px';
+        		}
         	}
         });
         scope.$on('$destroy', function(){
         	if ($select.appendToBody)
         	{
-        		scope.element.remove();
+        		scope.choicesElement.remove();
         	}
         });
       };

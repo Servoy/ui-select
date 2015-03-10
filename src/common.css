@@ -205,8 +205,11 @@
 }
 .ui-select-bootstrap.ui-select-choices-open
 {
-	max-height: 200px;
 	margin-top: -1px;
+}
+.ui-select-bootstrap.ui-select-choices
+{
+	max-height: 200px;
 }
 .ui-select-choices-open {
 	display:block;
