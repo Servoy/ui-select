@@ -69,12 +69,14 @@ uis.directive('uiSelectChoices',
         if ($select.appendToBody)
         {
     		$document.find('body').append(element);
+    		scope.element = element;
         }
         scope.$watch('$select.open', function(newValue) {
         	if (newValue)
         	{
         		scope.position = $position.offset(scope.container);
         		if ($select.searchEnabled) scope.position.top = scope.position.top + scope.container.prop('offsetHeight');
+                scope.dropdownStyle = {top: scope.position.top+'px', left: scope.position.left+'px'};
         	}
         });
       };
