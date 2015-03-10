@@ -79,6 +79,12 @@ uis.directive('uiSelectChoices',
                 scope.dropdownStyle = {top: scope.position.top+'px', left: scope.position.left+'px'};
         	}
         });
+        scope.$on('$destroy', function(){
+        	if ($select.appendToBody)
+        	{
+        		scope.element.remove();
+        	}
+        });
       };
     }
   };
