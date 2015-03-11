@@ -73,7 +73,7 @@ uis.directive('uiSelectChoices',
         }
         scope.showOnTop = function(position)
         {
-            var viewport_bottom = $window.scrollY + $window.innerHeight;
+            var viewport_bottom = $document.find('body')[0].scrollTop + $window.innerHeight;
             var max_height = scope.choicesElement.css('max-height') != 'none' ? parseInt(scope.choicesElement.css('max-height'), 10) : 200;
             return viewport_bottom < position.top + max_height;
         };
@@ -86,7 +86,7 @@ uis.directive('uiSelectChoices',
         		if (scope.showOnTop(position))
         		{
         			delete scope.dropdownStyle.top;
-        			scope.dropdownStyle.bottom = $window.scrollY + $window.innerHeight - $position.offset(scope.container).top + 'px';
+        			scope.dropdownStyle.bottom = $document.find('body')[0].scrollTop + $window.innerHeight - $position.offset(scope.container).top + 'px';
         		}
         	}
         });
