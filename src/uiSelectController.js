@@ -643,6 +643,10 @@ uis.controller('uiSelectCtrl',
     if(KEY.isVerticalMovement(key) && ctrl.items.length > 0){
       _ensureHighlightVisible();
     }
+    
+    if (!tagged  && key == KEY.TAB) {
+	    ctrl.open = false;
+     }
 
     if (key === KEY.ENTER || key === KEY.ESC) {
       e.preventDefault();
