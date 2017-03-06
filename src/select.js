@@ -400,8 +400,7 @@
 
           ctrl.onSelectCallback($scope, {
               $item: item,
-              $model: ctrl.parserResult.modelMapper($scope, locals),
-              $event: $event
+              $model: ctrl.parserResult.modelMapper($scope, locals)
           });
 
           if(ctrl.multiple) {
