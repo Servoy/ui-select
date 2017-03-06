@@ -5,7 +5,7 @@
     <span class="ui-select-match"></span>
     <li class="select2-search-field">
       <input
-        type="text"
+        type="search"
         autocomplete="off"
         autocorrect="off"
         autocapitalize="off"
@@ -16,7 +16,7 @@
         aria-label="{{ $select.baseTitle }}"
         aria-activedescendant="ui-select-choices-row-{{ $select.generatedId }}-{{ $select.activeIndex }}"
         class="select2-input ui-select-search"
-        placeholder="{{$select.getPlaceholder()}}"
+        placeholder="{{$selectMultiple.getPlaceholder()}}"
         ng-disabled="$select.disabled"
         ng-hide="$select.disabled"
         ng-model="$select.search"
@@ -25,8 +25,8 @@
         ondrop="return false;">
     </li>
   </ul>
-  <div class="select2-drop select2-with-searchbox select2-drop-active"
-       ng-class="{'select2-display-none': !$select.open}">
+  <div class="ui-select-dropdown select2-drop select2-with-searchbox select2-drop-active"
+       ng-class="{'select2-display-none': !$select.open || $select.items.length === 0}">
     <div class="ui-select-choices"></div>
   </div>
 </div>
