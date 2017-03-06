@@ -184,7 +184,8 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
         $timeout(function(){
           $select.onSelectCallback(scope, {
             $item: item,
-            $model: $select.parserResult.modelMapper(scope, locals)
+            $model: $select.parserResult.modelMapper(scope, locals),
+            $event: event
           });
         });
         $selectMultiple.updateModel();

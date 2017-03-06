@@ -57,7 +57,8 @@ uis.directive('uiSelectSingle', ['$timeout','$compile', function($timeout, $comp
         $timeout(function(){
           $select.onSelectCallback(scope, {
             $item: item,
-            $model: $select.parserResult.modelMapper(scope, locals)
+            $model: $select.parserResult.modelMapper(scope, locals),
+            $event: event
           });
         });
       });
