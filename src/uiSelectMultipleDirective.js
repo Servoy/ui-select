@@ -173,7 +173,7 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
         scope.$evalAsync(); //To force $digest
       };
 
-      scope.$on('uis:select', function (event, item) {
+      scope.$on('uis:select', function (event, item, originalEvent) {
         if($select.selected.length >= $select.limit) {
           return;
         }
@@ -185,7 +185,7 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
           $select.onSelectCallback(scope, {
             $item: item,
             $model: $select.parserResult.modelMapper(scope, locals),
-            $event: event
+            $event: originalEvent
           });
         });
         $selectMultiple.updateModel();

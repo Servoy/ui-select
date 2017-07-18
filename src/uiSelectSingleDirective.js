@@ -49,7 +49,7 @@ uis.directive('uiSelectSingle', ['$timeout','$compile', function($timeout, $comp
         $select.selected = ngModel.$viewValue;
       };
 
-      scope.$on('uis:select', function (event, item) {
+      scope.$on('uis:select', function (event, item, originalEvent) {
         $select.selected = item;
         var locals = {};        
         locals[$select.parserResult.itemName] = item;
@@ -58,7 +58,7 @@ uis.directive('uiSelectSingle', ['$timeout','$compile', function($timeout, $comp
           $select.onSelectCallback(scope, {
             $item: item,
             $model: $select.parserResult.modelMapper(scope, locals),
-            $event: event
+            $event: originalEvent
           });
         });
       });
