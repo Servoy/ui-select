@@ -427,7 +427,7 @@ uis.controller('uiSelectCtrl',
           }
         }
         _resetSearchInput();
-        $scope.$broadcast('uis:select', item);
+        $scope.$broadcast('uis:select', item, $event);
 
         if (ctrl.closeOnSelect) {
           ctrl.close(skipFocusser);
