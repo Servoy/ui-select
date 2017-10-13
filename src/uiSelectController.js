@@ -137,6 +137,9 @@ uis.controller('uiSelectCtrl',
             ctrl.$animate.off('enter', container[0], animateHandler);
             $timeout(function () {
               ctrl.focusSearchInput(initSearchValue);
+              if(!ctrl.tagging.isActivated && ctrl.items.length > 1) {
+                _ensureHighlightVisible();
+              }
             });
           }
         };
