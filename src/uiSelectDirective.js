@@ -251,14 +251,15 @@ uis.directive('uiSelect',
         var bodyElements = document.querySelectorAll('.svy-body,.ui-grid-viewport');
         if (appendToBody !== undefined ? appendToBody : uiSelectConfig.appendToBody) {
           scope.$watch('$select.open', function(isOpen) {
+            var i;
             if (isOpen) {
               positionDropdown();
-              for(var i = 0; i < bodyElements.length ; i++){
-                bodyElements[i].addEventListener('scroll',resetDropdown);
+              for (i = 0; i < bodyElements.length ; i++) {
+                bodyElements[i].addEventListener('scroll', resetDropdown);
               }
             } else {
-              for(var i = 0; i < bodyElements.length ; i++){
-                bodyElements[i].removeEventListener('scroll',resetDropdown);
+              for (i = 0; i < bodyElements.length ; i++) {
+                bodyElements[i].removeEventListener('scroll', resetDropdown);
               }
               resetDropdown();
             }
